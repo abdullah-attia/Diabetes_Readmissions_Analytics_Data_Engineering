@@ -1,0 +1,28 @@
+[0m00:49:32.696220 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D279B52570>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D277A3D070>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D277A3FA40>]}
+
+
+============================== 00:49:32.712587 | b549ce20-5e8f-4c79-bf49-d36f4aff4711 ==============================
+[0m00:49:32.712587 [info ] [MainThread]: Running with dbt=1.13.0-b1
+[0m00:49:32.712587 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'version_check': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Abdullah Ahmed\\.dbt', 'use_colors': 'True', 'hints_enabled': 'True', 'invocation_command': 'dbt init readmissions --skip-profile-setup', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'logs'}
+[0m00:49:32.712587 [debug] [MainThread]: Tracking: tracking
+[0m00:49:32.753086 [debug] [MainThread]: Starter project path: E:\Diabetes_Readmissions_Analytics_Data_Engineering\.venv-dbt\Lib\site-packages\dbt\include\starter_project
+[0m00:49:32.780331 [info ] [MainThread]: Your new dbt project "readmissions" was created!
+Initialized new project in E:\Diabetes_Readmissions_Analytics_Data_Engineering\warehouse\readmissions\readmissions
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m00:49:32.782331 [debug] [MainThread]: Command `dbt init` succeeded at 00:49:32.781331 after 0.25 seconds
+[0m00:49:32.782331 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D279B7C470>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D277EC8E30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D277C32C30>]}
+[0m00:49:32.783532 [debug] [MainThread]: Flushing usage events
+[0m00:49:33.802237 [debug] [MainThread]: An error was encountered while trying to flush usage events

@@ -46,4 +46,4 @@ airflow/plugins/__pycache__/
 .vscode/
 .idea/
 Thumbs.db
-.DS_Store
+.DS_Storewarehouse/dbt_project/.user.yml

@@ -1,0 +1,97 @@
+version: 2
+
+models:
+  - name: fct_encounter
+    description: One row per inpatient encounter (clean). Readmission KPIs use is_readmission_eligible.
+    columns:
+      - name: encounter_id
+        data_tests: [unique, not_null]
+      - name: patient_nbr
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_patient')
+                field: patient_nbr
+      - name: admission_type
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_admission_type')
+                field: admission_type
+      - name: discharge_disposition
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_discharge')
+                field: discharge_disposition
+      - name: readmitted
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['<30', '>30', 'NO']
+      - name: primary_diagnosis_group
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Circulatory', 'Respiratory', 'Digestive', 'Diabetes', 'Injury',
+                         'Musculoskeletal', 'Genitourinary', 'Neoplasms', 'Other', 'Unknown']
+
+  - name: fct_encounter_diagnosis
+    columns:
+      - name: encounter_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('fct_encounter')
+                field: encounter_id
+      - name: diagnosis_group
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Circulatory', 'Respiratory', 'Digestive', 'Diabetes', 'Injury',
+                         'Musculoskeletal', 'Genitourinary', 'Neoplasms', 'Other', 'Unknown']
+
+  - name: fct_encounter_medication
+    columns:
+      - name: encounter_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('fct_encounter')
+                field: encounter_id
+
+  - name: dim_patient
+    columns:
+      - name: patient_nbr
+        data_tests: [unique, not_null]
+
+  - name: dim_admission_type
+    columns:
+      - name: admission_type
+        data_tests: [unique, not_null]
+
+  - name: dim_admission_source
+    columns:
+      - name: admission_source
+        data_tests: [unique, not_null]
+
+  - name: dim_discharge
+    columns:
+      - name: discharge_disposition
+        data_tests: [unique, not_null]
+
+  - name: dim_specialty
+    columns:
+      - name: medical_specialty
+        data_tests: [unique, not_null]
+
+  - name: dim_payer
+    columns:
+      - name: payer
+        data_tests: [unique, not_null]
+
+  - name: dim_age_group
+    columns:
+      - name: age_group
+        data_tests: [unique, not_null]

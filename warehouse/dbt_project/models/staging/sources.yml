@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw
+    database: READMISSIONS_DW
+    schema: RAW
+    tables:
+      - name: encounters
+      - name: diagnoses
+      - name: medications
+      - name: lookups
+      - name: rejected
+      - name: dq_summary
