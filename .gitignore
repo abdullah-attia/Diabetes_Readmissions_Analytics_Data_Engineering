@@ -1,0 +1,23 @@
+# Byte-compiled / cache files
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Java / JDBC Drivers
+*.jar
+cleaning/drivers/
+
+# Hadoop runtime folders
+winutils.exe
+hadoop.dll
+
+# Raw data (do not track full source CSVs)
+data/raw/*
+!data/raw/.gitkeep
+
+# Processed outputs (do not track full parquet files)
+data/processed/*
+!data/processed/.gitkeep
+
+# Track the sample data for the Leader
+!data/sample/**
