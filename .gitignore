@@ -7,17 +7,17 @@ __pycache__/
 *.jar
 cleaning/drivers/
 
-# Hadoop runtime folders
+# Hadoop binaries
 winutils.exe
 hadoop.dll
 
-# Raw data (do not track full source CSVs)
+# Raw data
 data/raw/*
 !data/raw/.gitkeep
 
-# Processed outputs (do not track full parquet files)
+# Processed data
 data/processed/*
 !data/processed/.gitkeep
 
-# Track the sample data for the Leader
+# Sample data
 !data/sample/**
