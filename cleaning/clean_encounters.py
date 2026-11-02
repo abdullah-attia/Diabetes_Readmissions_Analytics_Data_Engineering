@@ -1,9 +1,8 @@
-import sys
+import argparse
 import os
-from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-from pyspark.sql.types import StructType, StructField, StringType, LongType
-import rules
+import sys
+
+# Spark workers must use this venv's Python (avoids "Python worker crashed" on Windows)
 os.environ["PYSPARK_PYTHON"] = sys.executable
 os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
@@ -15,27 +14,69 @@ if os.name == "nt":  # only needed on Windows; skipped in the Linux Docker conta
     os.environ["HADOOP_HOME"] = hadoop_dir
     os.environ["hadoop.home.dir"] = hadoop_dir
     os.environ["PATH"] = os.path.join(hadoop_dir, "bin") + os.pathsep + os.environ.get("PATH", "")
-hadoop_dir = os.path.expanduser("~/hadoop")
-os.environ["HADOOP_HOME"] = hadoop_dir
-os.environ["hadoop.home.dir"] = hadoop_dir
-os.environ["PATH"] = os.path.join(hadoop_dir, "bin") + os.pathsep + os.environ.get("PATH", "")
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+from pyspark.sql.types import StructType, StructField, StringType, LongType
+import rules
 
 # ---------------------------------------------------------
-# Configuration: Toggle between Local CSVs and SQL Server
-# Set USE_DATABASE = True on Day 5 when Member A is ready
+# Configuration (overridable with environment variables)
 # ---------------------------------------------------------
-USE_DATABASE = False
+JDBC_JAR_PATH = os.environ.get("JDBC_JAR_PATH", "cleaning/drivers/mssql-jdbc-12.8.1.jre11.jar")
+DEFAULT_JDBC_URL = (
+    "jdbc:sqlserver://localhost:1433;databaseName=ReadmissionsStaging;"
+    "encrypt=true;trustServerCertificate=true"
+)  # inside Docker, set STAGING_JDBC_URL with host.docker.internal instead of localhost
 
-# SQL Server staging database settings
-DB_HOST = "localhost"  # Use "host.docker.internal" when running inside Docker
-DB_PORT = "1433"
-DB_NAME = "ReadmissionsStaging"
-JDBC_JAR_PATH = "cleaning/drivers/mssql-jdbc-12.8.1.jre11.jar"
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Member B cleaning pipeline (Step 2)")
+    parser.add_argument("--source", choices=["csv", "jdbc"], default="csv",
+                        help="csv = read data/raw files; jdbc = read SQL Server staging tables")
+    parser.add_argument("--sample", action="store_true",
+                        help="read data/sample/ CSVs and write to data/sample/processed/")
+    args = parser.parse_args()
+    if args.sample and args.source == "jdbc":
+        parser.error("--sample only works with --source csv")
+    return args
+
+
+def read_inputs(spark, args):
+    """Returns (raw_encounters DataFrame, raw_mappings path-or-DataFrame) for rule R4."""
+    if args.source == "jdbc":
+        user = os.environ.get("STAGING_USER")
+        password = os.environ.get("STAGING_PASSWORD")
+        if not user or not password:
+            sys.exit("Set STAGING_USER and STAGING_PASSWORD environment variables for --source jdbc")
+        props = {
+            "user": user,
+            "password": password,
+            "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+        }
+        url = os.environ.get("STAGING_JDBC_URL", DEFAULT_JDBC_URL)
+        raw_encounters = (spark.read.jdbc(url=url, table="stg.encounters_raw", properties=props)
+                          .drop("load_id", "loaded_at"))
+        raw_mappings = spark.read.jdbc(url=url, table="stg.id_mapping", properties=props)
+        return raw_encounters, raw_mappings
+
+    if args.sample:
+        encounters_path = "data/sample/diabetic_data_sample.csv"
+        mapping_path = "data/sample/IDs_mapping.csv"
+    else:
+        encounters_path = "data/raw/diabetic_data.csv"
+        mapping_path = "data/raw/IDs_mapping.csv"
+    raw_encounters = spark.read.option("header", "true").csv(encounters_path)  # all columns as strings
+    return raw_encounters, mapping_path
 
 
 def main():
+    args = parse_args()
+    out_dir = "data/sample/processed" if args.sample else "data/processed"
+
     builder = SparkSession.builder \
         .appName("DiabetesPipeline-MemberB-Cleaning") \
+        .config("spark.driver.memory", "4g") \
         .config("spark.sql.execution.arrow.pyspark.enabled", "true") \
         .config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem") \
         .config("spark.hadoop.mapreduce.fileoutputcommitter.marksuccessfuljobs", "false") \
@@ -48,24 +89,12 @@ def main():
 
     spark = builder.getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
+    print(f"Source: {args.source} | Sample: {args.sample} | Output: {out_dir}")
 
     # ---------------------------------------------------------
     # 1. READ RAW DATA (CSV vs JDBC)
     # ---------------------------------------------------------
-    if USE_DATABASE:
-        jdbc_url = f"jdbc:sqlserver://{DB_HOST}:{DB_PORT};databaseName={DB_NAME};encrypt=false;trustServerCertificate=true"
-        db_properties = {
-            "user": "sa",
-            "password": "YourPasswordHere",  # Set Member A's password
-            "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-        }
-        raw_encounters = spark.read.jdbc(url=jdbc_url, table="stg.encounters_raw", properties=db_properties)
-        raw_mappings = spark.read.jdbc(url=jdbc_url, table="stg.id_mapping", properties=db_properties)
-    else:
-        raw_encounters_path = "data/raw/diabetic_data.csv"
-        mapping_csv_path = "data/raw/IDs_mapping.csv"
-        raw_encounters = spark.read.option("header", "true").csv(raw_encounters_path)
-        raw_mappings = mapping_csv_path
+    raw_encounters, raw_mappings = read_inputs(spark, args)
 
     total_raw_count = raw_encounters.count()
     dq_records = []
@@ -175,7 +204,6 @@ def main():
     # ---------------------------------------------------------
     # 5. WRITE CONTRACT 2 PARQUET ARTIFACTS
     # ---------------------------------------------------------
-    out_dir = "data/processed"
     contract_encounters.write.mode("overwrite").parquet(f"{out_dir}/encounters")
     diagnoses_df.write.mode("overwrite").parquet(f"{out_dir}/diagnoses")
     medications_df.write.mode("overwrite").parquet(f"{out_dir}/medications")
@@ -183,7 +211,7 @@ def main():
     all_rejected.write.mode("overwrite").parquet(f"{out_dir}/rejected")
     dq_summary_df.write.mode("overwrite").parquet(f"{out_dir}/dq_summary")
 
-    print("\nSUCCESS: All 6 Parquet outputs created in data/processed/!")
+    print(f"\nSUCCESS: All 6 Parquet outputs created in {out_dir}/")
 
 
 if __name__ == "__main__":
