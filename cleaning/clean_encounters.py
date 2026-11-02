@@ -4,7 +4,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import StructType, StructField, StringType, LongType
 import rules
-
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 hadoop_dir = os.path.expanduser("~/hadoop")
 os.environ["HADOOP_HOME"] = hadoop_dir
 os.environ["hadoop.home.dir"] = hadoop_dir
@@ -78,13 +79,13 @@ def main():
 
     # 3. CONTRACT 2 SCHEMA ALIGNMENT
     # Rename 'id' on each lookup to avoid ambiguous column lineage conflicts
-    adm_types = lookups_df.filter(F.col("mapping_type") == "admission_type_id") \
+    adm_types = lookups_df.filter(F.col("mapping_type") == "admission_type") \
                           .select(F.col("id").alias("adm_type_id_join"), F.col("label").alias("admission_type"))
-                          
-    adm_src = lookups_df.filter(F.col("mapping_type") == "admission_source_id") \
+
+    adm_src = lookups_df.filter(F.col("mapping_type") == "admission_source") \
                         .select(F.col("id").alias("adm_src_id_join"), F.col("label").alias("admission_source"))
-                        
-    disch_disp = lookups_df.filter(F.col("mapping_type") == "discharge_disposition_id") \
+
+    disch_disp = lookups_df.filter(F.col("mapping_type") == "discharge_disposition") \
                            .select(F.col("id").alias("disch_disp_id_join"), F.col("label").alias("discharge_disposition"))
 
     contract_encounters = final_encounters \
@@ -101,7 +102,7 @@ def main():
             "discharge_disposition", "is_readmission_eligible", "time_in_hospital",
             "payer", "medical_specialty", "num_lab_procedures", "num_procedures",
             "num_medications", "number_outpatient", "number_emergency",
-            "number_inpatient", "number_diagnoses", "alc_result", "alc_tested",
+            "number_inpatient", "number_diagnoses", "a1c_result", "a1c_tested",
             "glucose_result", "med_changed", "on_diabetes_med", "readmitted",
             "readmitted_30d"
         )

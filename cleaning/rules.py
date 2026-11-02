@@ -50,17 +50,21 @@ def rule_r3_invalid_gender(df: DataFrame):
 
 def rule_r4_process_lookups(mapping_path_or_df, spark_session=None):
     """
-    Parses IDs_mapping.csv or DataFrame into Contract 2 lookup schema:
-    (mapping_type, id, label)
+    Parses IDs_mapping.csv (CSV path) or stg.id_mapping (JDBC path) into the
+    Contract 2 lookup schema: (mapping_type, id, label).
+    mapping_type has no _id suffix; blank/separator rows are dropped; quotes stripped.
     """
-    # If a string path to CSV is passed, parse the stacked text format
+    from pyspark.sql.types import StructType, StructField, StringType
+
+    unknowns = ["null", "not available", "not mapped", "unknown/invalid", "unknown"]
+
+    # CSV path: parse the stacked text format
     if isinstance(mapping_path_or_df, str):
         with open(mapping_path_or_df, "r", encoding="utf-8") as f:
             lines = f.readlines()
 
         rows = []
         current_type = None
-        unknowns = {"null", "not available", "not mapped", "unknown/invalid", "unknown", ""}
 
         for line in lines:
             line = line.strip()
@@ -70,41 +74,54 @@ def rule_r4_process_lookups(mapping_path_or_df, spark_session=None):
             # Detect section header transitions
             lower_line = line.lower()
             if "admission_type_id" in lower_line:
-                current_type = "admission_type_id"
+                current_type = "admission_type"
                 continue
             elif "discharge_disposition_id" in lower_line:
-                current_type = "discharge_disposition_id"
+                current_type = "discharge_disposition"
                 continue
             elif "admission_source_id" in lower_line:
-                current_type = "admission_source_id"
+                current_type = "admission_source"
                 continue
 
             parts = line.split(",", 1)
-            if len(parts) == 2 and current_type:
-                code_id, desc = parts[0].strip(), parts[1].strip()
-                label = "Unknown" if desc.lower() in unknowns or not desc else desc
-                rows.append((current_type, str(code_id), label))
+            if len(parts) != 2 or not current_type:
+                continue
 
-        from pyspark.sql.types import StructType, StructField, StringType
+            code_id = parts[0].strip()
+            desc = parts[1].strip().strip('"').strip()
+
+            if not code_id.isdigit():  # skips the "," separator lines
+                continue
+
+            label = "Unknown" if (not desc or desc.lower() in unknowns) else desc
+            rows.append((current_type, code_id, label))
+
         schema = StructType([
             StructField("mapping_type", StringType(), False),
             StructField("id", StringType(), False),
-            StructField("label", StringType(), False)
+            StructField("label", StringType(), False),
         ])
         return spark_session.createDataFrame(rows, schema=schema).dropDuplicates(["mapping_type", "id"])
 
-    # Fallback if Member A's staging table DataFrame is passed via JDBC
+    # JDBC path: Member A's staging table stg.id_mapping
     df = mapping_path_or_df
-    unknowns = ["null", "not available", "not mapped", "unknown/invalid", "unknown"]
-    return df.withColumn(
-        "label",
-        F.when(F.lower(F.col("description")).isin(unknowns) | F.col("description").isNull(), "Unknown")
-         .otherwise(F.col("description"))
-    ).select(
-        F.col("mapping_type").cast(StringType()),
-        F.col("id").cast(StringType()),
-        F.col("label").cast(StringType())
-    ).dropDuplicates(["mapping_type", "id"])
+    clean_desc = F.trim(F.regexp_replace(F.col("description"), r'^"|"$', ""))
+    return (
+        df.withColumn("id", F.trim(F.col("id").cast(StringType())))
+          .filter(F.col("id").rlike("^[0-9]+$"))
+          .withColumn("mapping_type", F.regexp_replace(F.col("mapping_type"), "_id$", ""))
+          .withColumn(
+              "label",
+              F.when(clean_desc.isNull() | (clean_desc == "") | F.lower(clean_desc).isin(unknowns), "Unknown")
+               .otherwise(clean_desc),
+          )
+          .select(
+              F.col("mapping_type").cast(StringType()),
+              F.col("id").cast(StringType()),
+              F.col("label").cast(StringType()),
+          )
+          .dropDuplicates(["mapping_type", "id"])
+    )
 
 def rule_r5_death_hospice(df: DataFrame):
     """Flags is_readmission_eligible = False for death/hospice discharge codes."""
@@ -131,8 +148,7 @@ def rule_r7_unpivot_diagnoses(df: DataFrame):
     """
     # 1. Unpivot diag_1, diag_2, diag_3
     stack_expr = "stack(3, '1', diag_1, '2', diag_2, '3', diag_3) as (diag_position, icd9_code)"
-    dx_df = df.select("encounter_id", F.expr(stack_expr)) \
-              .filter(F.col("icd9_code").isNotNull())
+    dx_df = df.select("encounter_id", F.expr(stack_expr))
 
     # 2. Clean code text
     dx_df = dx_df.withColumn("code_clean", F.trim(F.col("icd9_code")))
@@ -153,23 +169,23 @@ def rule_r7_unpivot_diagnoses(df: DataFrame):
         # Diabetes: 250.xx
         .when((F.col("code_num") >= 250.0) & (F.col("code_num") < 251.0), "Diabetes")
         # Circulatory: 390-459, 785
-        .when(((F.col("code_num") >= 390.0) & (F.col("code_num") <= 459.9)) |
+        .when(((F.col("code_num") >= 390.0) & (F.col("code_num") < 460.0)) |
               ((F.col("code_num") >= 785.0) & (F.col("code_num") < 786.0)), "Circulatory")
         # Respiratory: 460-519, 786
-        .when(((F.col("code_num") >= 460.0) & (F.col("code_num") <= 519.9)) |
+        .when(((F.col("code_num") >= 460.0) & (F.col("code_num") < 520.0)) |
               ((F.col("code_num") >= 786.0) & (F.col("code_num") < 787.0)), "Respiratory")
         # Digestive: 520-579, 787
-        .when(((F.col("code_num") >= 520.0) & (F.col("code_num") <= 579.9)) |
+        .when(((F.col("code_num") >= 520.0) & (F.col("code_num") < 580.0)) |
               ((F.col("code_num") >= 787.0) & (F.col("code_num") < 788.0)), "Digestive")
         # Injury: 800-999
-        .when((F.col("code_num") >= 800.0) & (F.col("code_num") <= 999.9), "Injury")
+        .when((F.col("code_num") >= 800.0) & (F.col("code_num") < 1000.0), "Injury")
         # Musculoskeletal: 710-739
-        .when((F.col("code_num") >= 710.0) & (F.col("code_num") <= 739.9), "Musculoskeletal")
+        .when((F.col("code_num") >= 710.0) & (F.col("code_num") < 740.0), "Musculoskeletal")
         # Genitourinary: 580-629, 788
-        .when(((F.col("code_num") >= 580.0) & (F.col("code_num") <= 629.9)) |
+        .when(((F.col("code_num") >= 580.0) & (F.col("code_num") < 630.0)) |
               ((F.col("code_num") >= 788.0) & (F.col("code_num") < 789.0)), "Genitourinary")
         # Neoplasms: 140-239
-        .when((F.col("code_num") >= 140.0) & (F.col("code_num") <= 239.9), "Neoplasms")
+        .when((F.col("code_num") >= 140.0) & (F.col("code_num") < 240.0), "Neoplasms")
         .otherwise("Other")
     )
 
@@ -199,9 +215,9 @@ def rule_r9_unpivot_medications(df: DataFrame):
 def rule_r10_flags_and_windows(df: DataFrame):
     """Calculates operational flags, sequential visit order, and first-encounter markers."""
     out = df.withColumn("readmitted_30d", F.col("readmitted") == "<30") \
-            .withColumn("alc_tested", F.col("A1Cresult") != "Not tested") \
+            .withColumn("a1c_tested", F.col("A1Cresult") != "Not tested") \
             .withColumn("glucose_result", F.col("max_glu_serum")) \
-            .withColumn("alc_result", F.col("A1Cresult")) \
+            .withColumn("a1c_result", F.col("A1Cresult")) \
             .withColumn("med_changed", F.col("change") == "Ch") \
             .withColumn("on_diabetes_med", F.col("diabetesMed") == "Yes")
             
