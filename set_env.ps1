@@ -1,0 +1,3 @@
+$env:SF_ACCOUNT  = "FXIRHNK-EL90634"
+$env:SF_USER             = "PIPELINE_SVC"
+$env:SF_PRIVATE_KEY_PATH = "E:\Diabetes_Readmissions_Analytics_Data_Engineering\keys\rsa_key.p8"

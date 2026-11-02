@@ -2,4 +2,4 @@ pyspark==3.5.1
 pyarrow
 pandas
 pytest
-snowflake-connector-python
+snowflake-connector-python<4
