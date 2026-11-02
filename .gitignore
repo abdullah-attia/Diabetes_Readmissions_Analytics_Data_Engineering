@@ -1,3 +1,31 @@
-
+# Virtual environments
 .venv/
 .venv-dbt/
+
+# Secrets
+.env
+airflow/.env
+
+# Byte-compiled / cache files
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Java / JDBC Drivers
+*.jar
+cleaning/drivers/
+
+# Hadoop binaries
+winutils.exe
+hadoop.dll
+
+# Raw data
+data/raw/*
+!data/raw/.gitkeep
+
+# Processed data
+data/processed/*
+!data/processed/.gitkeep
+
+# Sample data
+!data/sample/**

@@ -1,3 +1,9 @@
+import os
+import sys
+
+# Ensure Python can resolve modules located in the parent directory (cleaning/)
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 import pytest
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F

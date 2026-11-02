@@ -6,31 +6,73 @@ from pyspark.sql.types import StructType, StructField, StringType, LongType
 import rules
 os.environ["PYSPARK_PYTHON"] = sys.executable
 os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+
+# -----------------------------------------------------------
+# Windows Hadoop Binaries Setup (for local file operations)
+# -----------------------------------------------------------
+if os.name == "nt":  # only needed on Windows; skipped in the Linux Docker container
+    hadoop_dir = os.path.expanduser("~/hadoop")
+    os.environ["HADOOP_HOME"] = hadoop_dir
+    os.environ["hadoop.home.dir"] = hadoop_dir
+    os.environ["PATH"] = os.path.join(hadoop_dir, "bin") + os.pathsep + os.environ.get("PATH", "")
 hadoop_dir = os.path.expanduser("~/hadoop")
 os.environ["HADOOP_HOME"] = hadoop_dir
 os.environ["hadoop.home.dir"] = hadoop_dir
 os.environ["PATH"] = os.path.join(hadoop_dir, "bin") + os.pathsep + os.environ.get("PATH", "")
 
+# ---------------------------------------------------------
+# Configuration: Toggle between Local CSVs and SQL Server
+# Set USE_DATABASE = True on Day 5 when Member A is ready
+# ---------------------------------------------------------
+USE_DATABASE = False
+
+# SQL Server staging database settings
+DB_HOST = "localhost"  # Use "host.docker.internal" when running inside Docker
+DB_PORT = "1433"
+DB_NAME = "ReadmissionsStaging"
+JDBC_JAR_PATH = "cleaning/drivers/mssql-jdbc-12.8.1.jre11.jar"
+
+
 def main():
-    spark = SparkSession.builder \
+    builder = SparkSession.builder \
         .appName("DiabetesPipeline-MemberB-Cleaning") \
         .config("spark.sql.execution.arrow.pyspark.enabled", "true") \
         .config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem") \
         .config("spark.hadoop.mapreduce.fileoutputcommitter.marksuccessfuljobs", "false") \
-        .master("local[*]") \
-        .getOrCreate()
-        
+        .master("local[*]")
+
+    # Include JDBC driver jar on the classpath if the jar exists
+    if os.path.exists(JDBC_JAR_PATH):
+        builder = builder.config("spark.jars", JDBC_JAR_PATH) \
+                         .config("spark.driver.extraClassPath", JDBC_JAR_PATH)
+
+    spark = builder.getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
 
-    # 1. READ RAW DATA
-    raw_encounters_path = "data/raw/diabetic_data.csv"
-    mapping_csv_path = "data/raw/IDs_mapping.csv"
+    # ---------------------------------------------------------
+    # 1. READ RAW DATA (CSV vs JDBC)
+    # ---------------------------------------------------------
+    if USE_DATABASE:
+        jdbc_url = f"jdbc:sqlserver://{DB_HOST}:{DB_PORT};databaseName={DB_NAME};encrypt=false;trustServerCertificate=true"
+        db_properties = {
+            "user": "sa",
+            "password": "YourPasswordHere",  # Set Member A's password
+            "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+        }
+        raw_encounters = spark.read.jdbc(url=jdbc_url, table="stg.encounters_raw", properties=db_properties)
+        raw_mappings = spark.read.jdbc(url=jdbc_url, table="stg.id_mapping", properties=db_properties)
+    else:
+        raw_encounters_path = "data/raw/diabetic_data.csv"
+        mapping_csv_path = "data/raw/IDs_mapping.csv"
+        raw_encounters = spark.read.option("header", "true").csv(raw_encounters_path)
+        raw_mappings = mapping_csv_path
 
-    raw_encounters = spark.read.option("header", "true").csv(raw_encounters_path)
     total_raw_count = raw_encounters.count()
     dq_records = []
 
+    # ---------------------------------------------------------
     # 2. RUN CLEANING RULES
+    # ---------------------------------------------------------
     # R1: Nulls & Types
     r1_df = rules.rule_r1_nulls_and_types(raw_encounters)
     dq_records.append(("R1", "Nulls & Types", total_raw_count, "fixed", "Replaced ? with null, cast metrics to int"))
@@ -48,8 +90,8 @@ def main():
     # Combine rejected rows
     all_rejected = r2_rej.unionByName(r3_rej, allowMissingColumns=True)
 
-    # R4: Process Lookups from stacked CSV
-    lookups_df = rules.rule_r4_process_lookups(mapping_csv_path, spark_session=spark)
+    # R4: Process Lookups (supports file path string or DataFrame)
+    lookups_df = rules.rule_r4_process_lookups(raw_mappings, spark_session=spark)
     dq_records.append(("R4", "Labels & Lookups", lookups_df.count(), "relabelled", "Merged ambiguous unknowns to Unknown"))
 
     # R5: Death / Hospice Eligibility
@@ -77,6 +119,7 @@ def main():
     final_encounters = rules.rule_r10_flags_and_windows(r8_df)
     dq_records.append(("R10", "Operational Flags", final_encounters.count(), "flagged", "Created readmitted_30d, seq, and first_encounter"))
 
+    # ---------------------------------------------------------
     # 3. CONTRACT 2 SCHEMA ALIGNMENT
     # Rename 'id' on each lookup to avoid ambiguous column lineage conflicts
     adm_types = lookups_df.filter(F.col("mapping_type") == "admission_type") \
@@ -107,7 +150,9 @@ def main():
             "readmitted_30d"
         )
 
+    # ---------------------------------------------------------
     # 4. RECONCILIATION CHECK
+    # ---------------------------------------------------------
     clean_count = contract_encounters.count()
     rejected_count = all_rejected.count()
 
@@ -118,7 +163,6 @@ def main():
         print("CRITICAL FAILURE: Pipeline record reconciliation did not balance!", file=sys.stderr)
         sys.exit(1)
 
-    # BUILD DQ_SUMMARY DATAFRAME
     dq_schema = StructType([
         StructField("rule_id", StringType(), False),
         StructField("rule_name", StringType(), False),
@@ -128,7 +172,9 @@ def main():
     ])
     dq_summary_df = spark.createDataFrame(dq_records, schema=dq_schema)
 
+    # ---------------------------------------------------------
     # 5. WRITE CONTRACT 2 PARQUET ARTIFACTS
+    # ---------------------------------------------------------
     out_dir = "data/processed"
     contract_encounters.write.mode("overwrite").parquet(f"{out_dir}/encounters")
     diagnoses_df.write.mode("overwrite").parquet(f"{out_dir}/diagnoses")
@@ -138,6 +184,7 @@ def main():
     dq_summary_df.write.mode("overwrite").parquet(f"{out_dir}/dq_summary")
 
     print("\nSUCCESS: All 6 Parquet outputs created in data/processed/!")
+
 
 if __name__ == "__main__":
     main()
