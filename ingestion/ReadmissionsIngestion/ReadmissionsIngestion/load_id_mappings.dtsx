@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="load_encounters"
   DTS:PackageType="5"
-  DTS:VersionBuild="23"
-  DTS:VersionGUID="{900A7DB1-BA8F-48F4-95B0-1DE6B2A65632}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{FA3D3A7F-B066-40DF-BB73-00AB6822F9C9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -40,7 +40,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Line"
-              DTS:DTSID="{FBB5F50C-6064-460F-9FFE-64B548D9982F}"
+              DTS:DTSID="{73BB42DD-F54F-4A9C-9826-AEDAC74D74C7}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -103,7 +103,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4135B2A5-9A07-4171-9028-C889E2986870}"
-          SQLTask:SqlStatementSource="UPDATE etl.load_audit&#xA;SET rows_read    = ? + ?,&#xA;    rows_written = (SELECT COUNT(*) FROM stg.encounters_raw WHERE load_id = ?),&#xA;    finished_at  = SYSDATETIME(),&#xA;    status       = 'success'&#xA;WHERE load_id = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="UPDATE etl.load_audit&#xA;SET rows_read    = ? + ?,&#xA;    rows_written = (SELECT COUNT(*) FROM stg.id_mapping WHERE load_id = ?),&#xA;    finished_at  = SYSDATETIME(),&#xA;    status       = 'success'&#xA;WHERE load_id = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::RowsRead"
@@ -1829,6 +1829,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="155,42"
+          Id="Package\Load mapping\Keep data rows"
+          TopLeft="26,301" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Load mapping\Count rows"
+          TopLeft="40,405" />
+        <NodeLayout
           Size="168,42"
           Id="Package\Load mapping\Read mapping file"
           TopLeft="32,80" />
@@ -1836,20 +1844,28 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Size="166,42"
           Id="Package\Load mapping\Split and tag lines"
           TopLeft="28,203" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load mapping\Write mapping"
+          TopLeft="42,567" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Load mapping\Add load_id"
+          TopLeft="43,495" />
         <EdgeLayout
-          Id="Package\Load mapping.Paths[Flat File Source Output]"
-          TopLeft="113.5,122">
+          Id="Package\Load mapping.Paths[Derived Column Output]"
+          TopLeft="114.25,537">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,81"
+              EndConnector="0,30"
               Start="0,0"
-              End="0,73.5">
+              End="0,22.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,73.5" />
+                    End="0,22.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1858,36 +1874,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Load mapping\Keep data rows"
-          TopLeft="26,301" />
-        <EdgeLayout
-          Id="Package\Load mapping.Paths[Output 0]"
-          TopLeft="107.25,245">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,56"
-              Start="0,0"
-              End="0,48.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="134,42"
-          Id="Package\Load mapping\Count rows"
-          TopLeft="40,405" />
         <EdgeLayout
           Id="Package\Load mapping.Paths[Data rows]"
           TopLeft="105.25,343">
@@ -1912,10 +1898,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="137,42"
-          Id="Package\Load mapping\Add load_id"
-          TopLeft="43,495" />
         <EdgeLayout
           Id="Package\Load mapping.Paths[Row Count Output 1]"
           TopLeft="109.25,447">
@@ -1938,24 +1920,42 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="150,42"
-          Id="Package\Load mapping\Write mapping"
-          TopLeft="42,567" />
         <EdgeLayout
-          Id="Package\Load mapping.Paths[Derived Column Output]"
-          TopLeft="114.25,537">
+          Id="Package\Load mapping.Paths[Output 0]"
+          TopLeft="107.25,245">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,30"
+              EndConnector="0,56"
               Start="0,0"
-              End="0,22.5">
+              End="0,48.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.5" />
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load mapping.Paths[Flat File Source Output]"
+          TopLeft="113.5,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,81"
+              Start="0,0"
+              End="0,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
