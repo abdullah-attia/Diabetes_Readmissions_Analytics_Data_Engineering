@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="load_encounters"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{A3B2C7A0-B584-4A86-874A-0999CCFE9490}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{32EEE20B-B01F-46D7-A230-B866692D96F7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -41,7 +41,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="encounter_id"
-              DTS:DTSID="{2A6775F0-C4FE-4C32-9843-11DB459E6550}"
+              DTS:DTSID="{7A08ED04-E0F1-4F60-88E3-FB288BEDF0D9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -50,7 +50,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="patient_nbr"
-              DTS:DTSID="{80D89108-B5D1-4832-9C39-B3530FDD86C7}"
+              DTS:DTSID="{D569D01D-F42B-4D96-9260-956FCB8FEEB1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -59,7 +59,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="race"
-              DTS:DTSID="{4D555897-AACB-4855-8760-7066F3C94560}"
+              DTS:DTSID="{25E4D2BC-74A6-42E1-A7C9-9C5456E0CA9E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -68,7 +68,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="gender"
-              DTS:DTSID="{D6528EAA-D062-45F1-B83E-C1038ED8C423}"
+              DTS:DTSID="{59443252-215B-4C7C-A20F-917AD616FDB1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -77,7 +77,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="age"
-              DTS:DTSID="{EDD1C56E-7AF6-48FF-908C-7139C6DD1F06}"
+              DTS:DTSID="{16F90DF0-2D32-40AC-9328-E8D84682287D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -86,7 +86,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="weight"
-              DTS:DTSID="{0841B377-DF2F-4841-8C7A-475E613435EA}"
+              DTS:DTSID="{D5E26051-FA4D-48C6-A7C7-6F1907405E04}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -95,7 +95,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="admission_type_id"
-              DTS:DTSID="{8C166C34-BF9B-408F-8DB8-9420BABBB028}"
+              DTS:DTSID="{272AAD90-0BA4-4561-A4C8-B852A6E9382A}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -104,7 +104,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="discharge_disposition_id"
-              DTS:DTSID="{E9A59E4C-C20B-40F6-8F77-661CEDE9CC28}"
+              DTS:DTSID="{D3E0C656-FE25-4AB6-941F-4AFD3967F38E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -113,7 +113,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="admission_source_id"
-              DTS:DTSID="{3BE26F19-635B-470C-8236-B7B49D65A097}"
+              DTS:DTSID="{E4D5D517-C3C6-48ED-8ACF-409137C3AFF4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -122,7 +122,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="time_in_hospital"
-              DTS:DTSID="{A4CF796A-C7CC-4612-850D-B551ED61FFC5}"
+              DTS:DTSID="{9CBA923B-A83B-425E-8160-4C714B108B67}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -131,7 +131,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="payer_code"
-              DTS:DTSID="{70C90D56-BF86-443B-A18D-137D96DB09A0}"
+              DTS:DTSID="{2401D734-D899-4DEB-8BBD-8EE099453B11}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -140,7 +140,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="medical_specialty"
-              DTS:DTSID="{D3348A28-CDE7-4D49-8BB6-2782C5EDCEF8}"
+              DTS:DTSID="{F3C32FFE-C05D-440A-A026-A1B98A968DB0}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -149,7 +149,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="num_lab_procedures"
-              DTS:DTSID="{A8608618-D1B7-47B0-A978-E2815EFA7C97}"
+              DTS:DTSID="{458A3238-BC3B-4E69-8184-84F2B8FEC373}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -158,7 +158,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="num_procedures"
-              DTS:DTSID="{DF944C18-8897-45F0-9D96-6EBD677A9F0D}"
+              DTS:DTSID="{8C4027A2-7E8E-4ADE-B9EF-C4D8B6C8643F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -167,7 +167,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="num_medications"
-              DTS:DTSID="{1574FCAE-92F5-4E3E-BCA5-C53E472D10BD}"
+              DTS:DTSID="{8B9561BF-97CC-4FC8-8B91-C781C03C5AA3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -176,7 +176,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="number_outpatient"
-              DTS:DTSID="{AF4ECD6E-1498-4EE0-80E3-54BDB67BCACD}"
+              DTS:DTSID="{D4B16A08-CBE3-4F09-B3E4-36A13E3317D8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -185,7 +185,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="number_emergency"
-              DTS:DTSID="{1E688FE4-D82F-46AF-9C0E-B0F7E09791EE}"
+              DTS:DTSID="{E2FDB257-2686-40A2-87EF-566ACFEE990E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -194,7 +194,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="number_inpatient"
-              DTS:DTSID="{BA19C5E4-8111-40B1-A6E6-19AE9E4C41E7}"
+              DTS:DTSID="{CAA75992-3BAE-4487-BEB5-78A99CB2D735}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -203,7 +203,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="diag_1"
-              DTS:DTSID="{86F33DD1-4D1C-4EF3-9F81-6C60F04D827B}"
+              DTS:DTSID="{A3549C97-D607-4C66-BFFD-968C7FC68883}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -212,7 +212,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="diag_2"
-              DTS:DTSID="{67B8A03F-E390-45B6-8EEC-72EE93359261}"
+              DTS:DTSID="{8DEB2E4E-DBE5-49FF-AEAA-C52D7BFEF53C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -221,7 +221,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="diag_3"
-              DTS:DTSID="{9352A6AD-18B2-4418-BAFC-9CA8B8872EF8}"
+              DTS:DTSID="{47EE4EAD-8C1D-4A2A-85E5-EF0BD18B8AFC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -230,7 +230,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="number_diagnoses"
-              DTS:DTSID="{EC7F094A-0224-4D56-9B23-90256CD26FE6}"
+              DTS:DTSID="{3FCDF58A-6555-4B95-A90F-CE2379C453B6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -239,7 +239,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="max_glu_serum"
-              DTS:DTSID="{FAB82258-11C7-4DB6-A3F8-236A2F8424E5}"
+              DTS:DTSID="{30E93A83-7317-4F75-B1C6-AD219CCBE12B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -248,7 +248,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="A1Cresult"
-              DTS:DTSID="{754E709F-C61D-4BAB-A384-BBC0395C852F}"
+              DTS:DTSID="{9F497FEF-8B33-49E7-A7E9-7170938DDA92}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -257,7 +257,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="metformin"
-              DTS:DTSID="{B53C28C3-1D2F-47FD-8274-9588011026D9}"
+              DTS:DTSID="{A110DFD1-99E2-47E1-AC83-8FDBEFBE5C79}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -266,7 +266,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="repaglinide"
-              DTS:DTSID="{DD6FBABA-9E94-4E76-82AA-978F1F9F0C2B}"
+              DTS:DTSID="{4BE5B7AE-3091-466D-8BCD-6F78AA36F4D3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -275,7 +275,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="nateglinide"
-              DTS:DTSID="{A0EB8320-A2B0-4BAD-9727-DE778E2D2395}"
+              DTS:DTSID="{B04CB193-DBD6-4E34-8A79-06BE6C570289}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -284,7 +284,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="chlorpropamide"
-              DTS:DTSID="{B662A6CB-4FA9-49DC-BF17-308CC07AB362}"
+              DTS:DTSID="{1D44B700-A9AF-4A63-A7F7-4F6AC2551558}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -293,7 +293,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="glimepiride"
-              DTS:DTSID="{BF9E46A1-34DB-49DC-9E16-D78B71117FAE}"
+              DTS:DTSID="{5AF126BB-BE8F-4648-96C5-BAECEF719489}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -302,7 +302,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="acetohexamide"
-              DTS:DTSID="{7EB091AE-CC66-4D3C-B28F-143E2A8EB275}"
+              DTS:DTSID="{92CF9E09-60C5-49EE-8E90-0F72B2B2B8B6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -311,7 +311,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="glipizide"
-              DTS:DTSID="{6D890430-79A1-412E-A265-5D9A22A7067A}"
+              DTS:DTSID="{26C3BED5-898B-462E-8061-D7C23BC6998D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -320,7 +320,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="glyburide"
-              DTS:DTSID="{7574FE1D-85F1-4A91-AE3F-5434FFFB991A}"
+              DTS:DTSID="{0B0CB3DD-2783-4E4A-8939-CBFEDDDA0BBB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -329,7 +329,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="tolbutamide"
-              DTS:DTSID="{742C5283-E032-4BEC-B793-669DF614A6D6}"
+              DTS:DTSID="{7209F236-E266-4682-A86D-498F88313930}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -338,7 +338,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="pioglitazone"
-              DTS:DTSID="{32EC02B0-5D51-4925-8DF7-245BEF251D30}"
+              DTS:DTSID="{C838E4A8-6579-4D1A-8865-33EEA10CA317}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -347,7 +347,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="rosiglitazone"
-              DTS:DTSID="{DCB89524-5795-4605-92B2-3A765FF19128}"
+              DTS:DTSID="{BFCD9549-C5AF-4F8A-9AA6-AB07A677B83C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -356,7 +356,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="acarbose"
-              DTS:DTSID="{3A3629D6-8B41-4550-AD71-4B0EE6BB5D19}"
+              DTS:DTSID="{2E5CC1C9-E0A4-40B9-80E2-909447392612}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -365,7 +365,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="miglitol"
-              DTS:DTSID="{4188F39E-C1EE-4309-BFE3-053B3C589B57}"
+              DTS:DTSID="{76AADDBA-6560-409F-A023-F16C10132A35}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -374,7 +374,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="troglitazone"
-              DTS:DTSID="{9CA81781-1346-438A-BB51-3CEA892D04FA}"
+              DTS:DTSID="{AE727DAC-D2B2-4530-85B4-7BA9ACF3E633}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -383,7 +383,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="tolazamide"
-              DTS:DTSID="{B4BC87E0-C103-4108-946A-6DDAA4F2D910}"
+              DTS:DTSID="{6B44AC17-3120-44C5-845F-95A4410643BA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -392,7 +392,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="examide"
-              DTS:DTSID="{1D0830FA-A70E-4C79-81BD-65804A040125}"
+              DTS:DTSID="{A147017A-A2F2-4D21-925C-96D5A7227F35}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -401,7 +401,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="citoglipton"
-              DTS:DTSID="{697C4B89-1299-4271-9145-1A7B6D345DA9}"
+              DTS:DTSID="{14933682-3337-41BE-9CA7-934C827E45EA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -410,7 +410,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="insulin"
-              DTS:DTSID="{10811855-6797-4CF8-ADC2-E9D34E3D3BFC}"
+              DTS:DTSID="{696EFA9A-4B66-4D8E-A611-103AE3BC818D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -419,7 +419,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="glyburide-metformin"
-              DTS:DTSID="{E5B1903A-41B6-4B9F-B397-4065B339A15B}"
+              DTS:DTSID="{A5914CB9-B2D4-4515-AE34-7B4462B5EAA5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -428,7 +428,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="glipizide-metformin"
-              DTS:DTSID="{77E19469-6316-44C4-A35F-9E3ECDE3C68E}"
+              DTS:DTSID="{0E66854C-1D73-43E6-B6B5-347B928EB84E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -437,7 +437,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="glimepiride-pioglitazone"
-              DTS:DTSID="{111D1E21-8E85-4BEA-81F4-7556627A04E2}"
+              DTS:DTSID="{4B9F1DC7-7371-4987-8C85-D27F87A0A326}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -446,7 +446,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="metformin-rosiglitazone"
-              DTS:DTSID="{D047B745-F580-43FE-BF8B-80C605C521F9}"
+              DTS:DTSID="{657E19EF-1C0B-4FAD-9519-A525D5167CDF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -455,7 +455,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="metformin-pioglitazone"
-              DTS:DTSID="{6A2F6BF1-ACCB-4A54-9B57-B7A8E479829B}"
+              DTS:DTSID="{515FEFAE-CD38-4D1D-9802-5647D7917119}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -464,7 +464,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="change"
-              DTS:DTSID="{E4A0BBE4-F64E-4854-ADD8-79355215A477}"
+              DTS:DTSID="{A7F9C2B3-8104-4BF7-BEAE-3D5777294A72}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -473,7 +473,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="diabetesMed"
-              DTS:DTSID="{52197CA6-54FD-417D-9069-2621BB88CB1D}"
+              DTS:DTSID="{B698D1B1-03C0-4859-BD1C-3AE15043B8FE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -482,7 +482,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="readmitted"
-              DTS:DTSID="{394BCC37-26DE-4528-8B3D-C0FADF061D5E}"
+              DTS:DTSID="{5687D7B4-DC60-43ED-9B8C-3DDE8F39943D}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -3304,19 +3304,111 @@
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="160,42"
+          Id="Package.EventHandlers[OnError]\Mark audit failed"
+          TopLeft="223,99" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <TaskHost
     design-time-name="Package\Load encounters">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="131,42"
-          Id="Package\Load encounters\Read CSV"
-          TopLeft="221.666666666667,86.5" />
-        <NodeLayout
           Size="134,42"
           Id="Package\Load encounters\Count rows"
           TopLeft="120.5,182.5" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Load encounters\Add load_id"
+          TopLeft="111.5,266.5" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Load encounters\Count errors"
+          TopLeft="354.166666666667,200.833333333333" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Load encounters\Write staging"
+          TopLeft="108,364" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Load encounters\Write errors"
+          TopLeft="358.333333333333,363.333333333333" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Load encounters\Add error info"
+          TopLeft="360.833333333333,284.166666666667" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Load encounters\Read CSV"
+          TopLeft="221.666666666667,86.5" />
+        <EdgeLayout
+          Id="Package\Load encounters.Paths[Row Count Output 11]"
+          TopLeft="424.166666666667,242.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.16666666666652,41.3333333333334"
+              Start="0,0"
+              End="9.16666666666652,33.8333333333334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.6666666666667"
+                    Point2="0,20.6666666666667"
+                    Point3="4,20.6666666666667" />
+                  <mssgle:LineSegment
+                    End="5.16666666666652,20.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.16666666666652,20.6666666666667"
+                    Point2="9.16666666666652,20.6666666666667"
+                    Point3="9.16666666666652,24.6666666666667" />
+                  <mssgle:LineSegment
+                    End="9.16666666666652,33.8333333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load encounters.Paths[Row Count Output 1]"
+          TopLeft="183.75,224.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Load encounters.Paths[Flat File Source Output]"
           TopLeft="266.666666666667,128.5">
@@ -3348,65 +3440,11 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="137,42"
-          Id="Package\Load encounters\Add load_id"
-          TopLeft="111.5,266.5" />
-        <EdgeLayout
-          Id="Package\Load encounters.Paths[Row Count Output 1]"
-          TopLeft="183.75,224.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,42"
-              Start="0,0"
-              End="0,34.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="143,42"
-          Id="Package\Load encounters\Write staging"
-          TopLeft="108,364" />
-        <EdgeLayout
-          Id="Package\Load encounters.Paths[Derived Column Output]"
-          TopLeft="179.75,308.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,55.5"
-              Start="0,0"
-              End="0,48">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="140,42"
-          Id="Package\Load encounters\Count errors"
-          TopLeft="354.166666666667,200.833333333333" />
         <EdgeLayout
           Id="Package\Load encounters.Paths[Flat File Source Error Output]"
           TopLeft="307.666666666667,128.5">
@@ -3443,48 +3481,6 @@
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="145,42"
-          Id="Package\Load encounters\Add error info"
-          TopLeft="360.833333333333,284.166666666667" />
-        <EdgeLayout
-          Id="Package\Load encounters.Paths[Row Count Output 11]"
-          TopLeft="424.166666666667,242.833333333333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="9.16666666666652,41.3333333333334"
-              Start="0,0"
-              End="9.16666666666652,33.8333333333334">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.6666666666667" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.6666666666667"
-                    Point2="0,20.6666666666667"
-                    Point3="4,20.6666666666667" />
-                  <mssgle:LineSegment
-                    End="5.16666666666652,20.6666666666667" />
-                  <mssgle:CubicBezierSegment
-                    Point1="5.16666666666652,20.6666666666667"
-                    Point2="9.16666666666652,20.6666666666667"
-                    Point3="9.16666666666652,24.6666666666667" />
-                  <mssgle:LineSegment
-                    End="9.16666666666652,33.8333333333334" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="136,42"
-          Id="Package\Load encounters\Write errors"
-          TopLeft="358.333333333333,363.333333333333" />
         <EdgeLayout
           Id="Package\Load encounters.Paths[Derived Column Output1]"
           TopLeft="429.833333333333,326.166666666667">
@@ -3504,7 +3500,33 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load encounters.Paths[Derived Column Output]"
+          TopLeft="179.75,308.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.5"
+              Start="0,0"
+              End="0,48">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3536,17 +3558,5 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="160,42"
-          Id="Package.EventHandlers[OnError]\Mark audit failed"
-          TopLeft="223,99" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
