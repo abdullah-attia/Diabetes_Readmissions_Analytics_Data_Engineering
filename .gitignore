@@ -53,3 +53,5 @@ ingestion/**/.vs/
 ingestion/**/bin/
 ingestion/**/obj/
 ingestion/**/UpgradeLog*.htm
+
+.vs/
