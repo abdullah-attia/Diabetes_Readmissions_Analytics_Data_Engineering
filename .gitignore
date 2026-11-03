@@ -47,3 +47,9 @@ airflow/plugins/__pycache__/
 .idea/
 Thumbs.db
 .DS_Storewarehouse/dbt_project/.user.yml
+
+# Visual Studio / SSIS build files
+ingestion/**/.vs/
+ingestion/**/bin/
+ingestion/**/obj/
+ingestion/**/UpgradeLog*.htm
