@@ -11,8 +11,9 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="load_encounters"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{32EEE20B-B01F-46D7-A230-B866692D96F7}">
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{13269E69-B05C-414C-A88A-2A9DBCAFFF8A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -22,7 +23,7 @@
       DTS:DTSID="{0FDE0142-7F29-4775-918D-C70327DE12AE}"
       DTS:ObjectName="FF_diabetic_data">
       <DTS:PropertyExpression
-        DTS:Name="ConnectionString">@[$Project::SourceFile]</DTS:PropertyExpression>
+        DTS:Name="ConnectionString">@[$Project::DataDir] + "\\diabetic_data.csv"</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -32,7 +33,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x0022_"
           DTS:CodePage="65001"
-          DTS:ConnectionString="D:\projects\readmissions-pipeline\data\raw\diabetic_data.csv">
+          DTS:ConnectionString="E:\Diabetes_Readmissions_Analytics_Data_Engineering\data\raw\diabetic_data.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"

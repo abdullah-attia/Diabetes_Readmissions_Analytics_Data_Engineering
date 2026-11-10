@@ -3,7 +3,13 @@
    Creates the staging, audit and error tables.
    Safe to re-run: drops and recreates the tables.
    ============================================================ */
+IF DB_ID('ReadmissionsStaging') IS NULL CREATE DATABASE ReadmissionsStaging;
+GO
 USE ReadmissionsStaging;
+GO
+IF SCHEMA_ID('stg') IS NULL EXEC('CREATE SCHEMA stg');
+IF SCHEMA_ID('etl') IS NULL EXEC('CREATE SCHEMA etl');
+GO
 GO
 
 IF SCHEMA_ID('stg') IS NULL EXEC('CREATE SCHEMA stg');

@@ -16,7 +16,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">D:\projects\Diabetes_Readmissions_Analytics_Data_Engineering\data\raw\diabetic_data.csv</SSIS:Property>
+        SSIS:Name="Value">E:\Diabetes_Readmissions_Analytics_Data_Engineering\data\raw\diabetic_data.csv</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
@@ -37,7 +37,28 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">D:\projects\Diabetes_Readmissions_Analytics_Data_Engineering\data\raw\IDs_mapping.csv</SSIS:Property>
+        SSIS:Name="Value">E:\Diabetes_Readmissions_Analytics_Data_Engineering\data\raw\IDs_mapping.csv</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="DataDir">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{dcc9d49b-1143-4c19-a27d-fd57ed941e81}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value">E:\Diabetes_Readmissions_Analytics_Data_Engineering\data\raw</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>

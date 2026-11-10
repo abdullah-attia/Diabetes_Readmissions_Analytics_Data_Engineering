@@ -12,11 +12,11 @@
   <DataSourceViews />
   <DeploymentModelSpecificContent>
     <Manifest>
-      <SSIS:Project SSIS:ProtectionLevel="EncryptSensitiveWithUserKey" xmlns:SSIS="www.microsoft.com/SqlServer/SSIS">
+      <SSIS:Project SSIS:ProtectionLevel="DontSaveSensitive" xmlns:SSIS="www.microsoft.com/SqlServer/SSIS">
         <SSIS:Properties>
           <SSIS:Property SSIS:Name="ID">{350b2cc7-c1dd-43e3-a3e7-9a987a1c0b6d}</SSIS:Property>
           <SSIS:Property SSIS:Name="Name">ReadmissionsIngestion</SSIS:Property>
-          <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+          <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
           <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
           <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
           <SSIS:Property SSIS:Name="VersionComments">
@@ -26,7 +26,6 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DESKTOP-5EPLK95</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAz1oppyeBM0S2VwUi1NXmCgAAAAACAAAAAAAQZgAAAAEAACAAAACgMOnnUUbtHy+Kbk9kX6jrdC4beY5BGm1zy40QoQ5RBwAAAAAOgAAAAAIAACAAAADDW/f9h5s/Lh9P4tpE+McCL11Q3tFgfES/ENS1+PfpCZAAAACThEumR9WlGfDfuhpSF6gTp1YFc+uqBpMBdpGFN9hKHm3SpYKYPYzebX4I8Wu517LOPpKdRv0oKxFYc6Tul8ykWKqgqnEdabhjUZAFSss4r8TROHNTgIB+TyFcMCFTSRrO46ZbADlgz5JHaFpc1h5NVrO9RQQVG1NVjZVXllsjTbFwzvZnsmiI+ftA8eRCf4JAAAAAtrbJCcsaYjybjWfix9QqU1BGGXat8BYgajoZI0qinzqOKElcVh3ZhBvpUYYBIpJ9g+C5Kc0fV+F6B3SK96fd+Q==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -43,14 +42,14 @@
                 <SSIS:Property SSIS:Name="Name">load_encounters</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">16</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">19</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{32EEE20B-B01F-46D7-A230-B866692D96F7}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{13269E69-B05C-414C-A88A-2A9DBCAFFF8A}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.FF_diabetic_data.AlwaysCheckForRowDelimiters">
@@ -391,14 +390,14 @@
                 <SSIS:Property SSIS:Name="Name">load_encounters</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">27</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">29</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{FA3D3A7F-B066-40DF-BB73-00AB6822F9C9}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{3A8503F3-EF6F-4688-A404-A46D6350454F}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.FF_id_mapping.AlwaysCheckForRowDelimiters">
