@@ -28,6 +28,7 @@
 - [The pipeline, stage by stage](#the-pipeline-stage-by-stage)
 - [Data quality: what we found and fixed](#data-quality-what-we-found-and-fixed)
 - [Key findings](#key-findings)
+- [Dashboard](#dashboard)
 - [Data model](#data-model)
 - [How we know the numbers are right](#how-we-know-the-numbers-are-right)
 - [Repository structure](#repository-structure)
@@ -185,6 +186,31 @@ Full register with the SQL behind each number: [docs/issues_register.md](docs/is
 2. **Measure before changing treatment:** make an HbA1c test standard before adjusting diabetes medication; only 1 in 6 is tested today.
 3. **Strengthen handovers:** a structured handover for transfers and for patients leaving against advice.
 4. **Fix data capture:** record specialty and payer on every stay (49% and 40% missing today).
+
+---
+
+## Dashboard
+
+The Power BI report ([`dashboard/charts.pbix`](dashboard/charts.pbix)) has 5 pages, one for each management question.
+
+**Page 1 · Overview: how big is the readmission problem?**
+
+<p align="center">
+  <img src="docs/assets/dashboard/overview.png" alt="Overview page: KPI cards (11.39% 30-day readmission rate, 11,314 readmissions, 447,352 bed-days, 4.40 average stay, $25M estimated cost, 16.72% HbA1c testing rate) and readmission rate by age group" width="100%">
+</p>
+
+<table>
+  <tr>
+    <td width="50%"><b>Page 2 · Drivers: which patients are readmitted most?</b><br><br><img src="docs/assets/dashboard/drivers.png" alt="Drivers page: readmission rate by prior admissions, primary diagnosis, admission source and specialty"></td>
+    <td width="50%"><b>Page 3 · Care quality: does HbA1c testing help?</b><br><br><img src="docs/assets/dashboard/care_quality.png" alt="Care quality page: readmission rate by HbA1c testing, HbA1c result, discharge destination and medication change"></td>
+  </tr>
+  <tr>
+    <td width="50%"><b>Page 4 · Patients &amp; stays: who uses the most beds?</b><br><br><img src="docs/assets/dashboard/patients_stays.png" alt="Patients and stays page: frequent patients share, payer distribution, length of stay and stay by diagnosis"></td>
+    <td width="50%"><b>Page 5 · Data trust: can we trust these numbers?</b><br><br><img src="docs/assets/dashboard/data_trust.png" alt="Data trust page: record funnel 101,766 to 99,340, the 10 cleaning rules, missing-data share and the 9.01% vs 9.0% benchmark"></td>
+  </tr>
+</table>
+
+> The estimated readmission cost uses an adjustable cost-per-day slider, because the real cost per bed-day is an assumption (see [Limitations](#limitations-and-next-steps)).
 
 ---
 
